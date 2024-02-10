@@ -15,7 +15,7 @@ public class ColorImage {
     private int[][][] pixels; // 3D array to store RGB values
     private BufferedImage image;
 
-    public ColorImage(String filename) {
+    public ColorImage(String filename) { //Color Image constructor
         
         this.filename = filename;
 
@@ -32,7 +32,7 @@ public class ColorImage {
             this.height = image.getHeight();
             this.depth = image.getColorModel().getPixelSize();
 
-            pixels = new int[height][width][3];
+            pixels = new int[height][width][3];   //initalizing pixels variable
             for(int i = 0; i < height; i++){
                 for( int j = 0; j < width; j++){
                     int rgb = image.getRGB(i, j);
@@ -65,7 +65,7 @@ public class ColorImage {
         return pixels[i][j];
     }
 
-    public void reduceColor(int d) {
+    public void reduceColor(int d) { //enter the value you want to reduce the current Dimension by
         for(int i = 0; i < height; i++){
             for( int j = 0; j < width; j++){
                 for(int k = 0; k<3; k++){
