@@ -1,13 +1,8 @@
 package CSI_2120_Project_Part_1;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
-
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -36,6 +31,18 @@ public class ColorImage {
             this.width = image.getWidth();
             this.height = image.getHeight();
             this.depth = image.getColorModel().getPixelSize();
+
+            pixels = new int[height][width][3];
+            for(int i = 0; i < height; i++){
+                for( int j = 0; j < width; j++){
+                    int rgb = image.getRGB(i, j);
+                    int r = (rgb >> 16) & 0xFF;
+                    int g = (rgb >> 8) & 0xFF;
+                    int b = rgb & 0xFF;
+                    pixels[i][j] = new int[] {r, g, b};
+                }
+            }
+            reduceColor(8-depth);
     }
 
     public int getWidth() {
@@ -59,10 +66,15 @@ public class ColorImage {
     }
 
     public void reduceColor(int d) {
-        // Reduce color space to d-bit representation
+        for(int i = 0; i < height; i++){
+            for( int j = 0; j < width; j++){
+                for(int k = 0; k<3; k++){
+                    pixels[i][j][k] = (pixels[i][j][k] >>= (8-d));
+                }
+            }
+        }
+
     }
-
-
 }
 
 
