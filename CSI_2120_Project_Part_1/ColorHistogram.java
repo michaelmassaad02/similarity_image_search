@@ -21,19 +21,24 @@ public class ColorHistogram {
         this.numBin = (int) Math.pow(2, d * 3);
         this.histogram = new int[numBin];
 
-        for (int i=0; i<numBin; i++){
+        for (int i=0; i<numBin; i++){ //initalizing the values to 0
             histogram[i] = 0;
         }
     }
 
     public ColorHistogram(String filename) {  //constructor of ColorHistogram class where there is only an String filename inputed 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))){
-            String line;
-            int indx= 0;
 
-            while ((line = reader.readLine()) != null && indx < numBin){
+            this.numBin = Integer.parseInt((reader.readLine()).trim());
+            histogram = new int[numBin];
 
-                histogram[indx++] = Integer.parseInt(line.trim());
+
+
+            String line = reader.readLine();
+            String[] vals = (line.split(" "));
+
+            for (int i = 0; i < numBin; i++){
+                histogram[i] = Integer.parseInt(vals[i]);
             }
 
         }
@@ -66,7 +71,7 @@ public class ColorHistogram {
             answ += Math.min(this.histogram[i], hist.histogram[i]); //finding the intersection and storing it into answ variable
         }
 
-        answ = (image.getWidth() * image.getHeight()) / answ;  
+        answ = answ / (image.getWidth() * image.getHeight());  
 
         return answ; 
     }
@@ -74,10 +79,11 @@ public class ColorHistogram {
     public void save(String filename) {  //write into a file using items in histogram 
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))){
-            for (int i = 0; i < numBin; i++){
+            bw.write(numBin);
+            bw.newLine();
 
+            for (int i = 0; i < numBin; i++){
                 bw.write(Integer.toString(histogram[i]));
-                bw.newLine();                               //***idk if we need to do new line or not? ***
             }
 
         }
