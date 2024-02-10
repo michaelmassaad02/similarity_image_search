@@ -65,7 +65,7 @@ public class ColorImage {
         return pixels[i][j];
     }
 
-    public void reduceColor(int d) { //enter the value you want to reduce the current Dimension by
+    public void reduceColor(int d) { //enter the value you want to reduce the current Dimension to d
         for(int i = 0; i < height; i++){
             for( int j = 0; j < width; j++){
                 for(int k = 0; k<3; k++){
@@ -76,13 +76,5 @@ public class ColorImage {
 
     }
 }
-
-
-
-
-
-
-
-
 
 

@@ -1,9 +1,10 @@
 package CSI_2120_Project_Part_1;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.io.File;
 
 public class SimilaritySearch{
+    
 
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -26,25 +27,44 @@ public class SimilaritySearch{
         ColorHistogram queryHistogram = new ColorHistogram(colorDepth);
         queryHistogram.setImage(queryImage);
 
+        //double[] queryHist = queryHistogram.getHistogram();
 
-        
+        File data_set_Dir = new File(imageDatasetDirectory);
+        File[] imgfiles = data_set_Dir.listFiles();
 
-        List<ColorImage> similarImages = new ArrayList<>();
-        
+        double[] similarImages = new double[imgfiles.length];
 
-        
-        for (ColorImage image : similarImages) {
-            System.out.println(image.getFilename());
+        for(int i = 0; i < imgfiles.length; i= i + 2){
+            if(imgfiles[i].isFile()){
+
+                String filename = imgfiles[i].getPath();
+                ColorHistogram data_set_hist = new ColorHistogram(filename);
+                double similar_result = queryHistogram.compare(data_set_hist);
+                similarImages[i] = similar_result;
+
+            }
+
         }
+
+        System.out.println("The 5 most similar images to the query image " + queryImageFilename + " are:");
+        double[] final_answ_files = new double[5];
+        int max_val = 0;
+
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < similarImages.length;j++){
+
+                if(final_answ_files[i] < similarImages[j]){
+                    max_val = j;
+                    final_answ_files[i] = similarImages[j];
+                    
+                }
+            }
+            System.out.println(imgfiles[max_val].getName() + "has similarity:" + similarImages[max_val]);
+
+            similarImages[max_val] = -1.0;
+        }
+        
+        
     }
 
-
 }
-
-
-
-
-
-
-
-
