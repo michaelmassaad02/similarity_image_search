@@ -15,6 +15,10 @@ public class ColorImage {
     private int[][][] pixels; // 3D array to store RGB values
     private BufferedImage image;
 
+    public static void main(String[] args) {
+        System.out.println("Test");
+    }
+
     public ColorImage(String filename) { //Color Image constructor
         
         this.filename = filename;

@@ -1,11 +1,9 @@
 package CSI_2120_Project_Part_1;
 
-
 import java.io.File;
 
 public class SimilaritySearch{
     
-
     public static void main(String[] args) {
         if (args.length != 2) {
             System.err.println("Please Enter a valid input such as: java SimilaritySearch <queryImageFilename> <imageDatasetDirectory>");
@@ -15,7 +13,7 @@ public class SimilaritySearch{
         String queryImageFilename = args[0];
         String imageDatasetDirectory = args[1];
 
-
+        
         ColorImage queryImage = new ColorImage(queryImageFilename);
 
 
@@ -34,7 +32,7 @@ public class SimilaritySearch{
 
         double[] similarImages = new double[imgfiles.length];
 
-        for(int i = 0; i < imgfiles.length; i= i + 2){
+        for(int i = 0; i < imgfiles.length; i= i + 2){ //maybe 1     ***************************
             if(imgfiles[i].isFile()){
 
                 String filename = imgfiles[i].getPath();

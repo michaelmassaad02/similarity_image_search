@@ -4,12 +4,9 @@ package CSI_2120_Project_Part_1;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
-@SuppressWarnings("unused")
 public class ColorHistogram {
 
     private int[] histogram;
@@ -94,7 +91,3 @@ public class ColorHistogram {
     }
 
 }
-
-
-
-
