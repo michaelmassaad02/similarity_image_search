@@ -1,6 +1,5 @@
 package CSI_2120_Project_Part_1;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -24,8 +23,8 @@ public class ColorHistogram {
     }
 
     public ColorHistogram(String filename) {  //constructor of ColorHistogram class where there is only an String filename inputed 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))){
-
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
             this.numBin = Integer.parseInt((reader.readLine()).trim());
             histogram = new int[numBin];
 
@@ -68,7 +67,7 @@ public class ColorHistogram {
             answ += Math.min(this.histogram[i], hist.histogram[i]); //finding the intersection and storing it into answ variable
         }
 
-        answ = answ / (image.getWidth() * image.getHeight());  
+        answ = answ / numBin;  
 
         return answ; 
     }

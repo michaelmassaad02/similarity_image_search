@@ -4,7 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class ColorImage {
 
@@ -13,40 +14,49 @@ public class ColorImage {
     private int height;
     private int depth; // Number of bits per pixel
     private int[][][] pixels; // 3D array to store RGB values
-    private BufferedImage image;
+    private BufferedImage image; //not used
 
-    public static void main(String[] args) {
-        System.out.println("Test");
-    }
 
     public ColorImage(String filename) { //Color Image constructor
         
         this.filename = filename;
 
             try {
-                File file = new File(filename);
-                this.image = ImageIO.read(file);
-                if (image == null) {
-                    System.out.println("Failed to read the image.");
-                }
+                BufferedReader reader = new BufferedReader(new FileReader(filename));
+                
+                reader.readLine();
+                reader.readLine();
+                        String[] dim = reader.readLine().split(" ");
+                        this.width = Integer.parseInt(dim[0]); //image.getWidth();
+                        this.height = Integer.parseInt(dim[1]);
+                        this.depth = Integer.parseInt(reader.readLine());
+                        
+
+                        pixels = new int[height][width][3];   //initalizing pixels variable
+                        
+                        String line;
+                        int index = 0;
+
+                        while ((line = reader.readLine()) != null) {
+                            
+                            // Split the line into RGB values
+                            String[] rgbValues = line.trim().split(" ");
+                          
+                            for (int i = 0; i < rgbValues.length; i += 3) {
+                                int red = Integer.parseInt(rgbValues[i]);
+                                int green = Integer.parseInt(rgbValues[i + 1]);
+                                int blue = Integer.parseInt(rgbValues[i + 2]);
+                                int[] pix = {red, green, blue};
+                                pixels[index/width][index % width] = pix;
+                            }
+
+                            index++;
+                        }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            this.width = image.getWidth();
-            this.height = image.getHeight();
-            this.depth = image.getColorModel().getPixelSize();
-
-            pixels = new int[height][width][3];   //initalizing pixels variable
-            for(int i = 0; i < height; i++){
-                for( int j = 0; j < width; j++){
-                    int rgb = image.getRGB(i, j);
-                    int r = (rgb >> 16) & 0xFF;
-                    int g = (rgb >> 8) & 0xFF;
-                    int b = rgb & 0xFF;
-                    pixels[i][j] = new int[] {r, g, b};
-                }
-            }
-            reduceColor(8-depth);
+            
     }
 
     public int getWidth() {
@@ -80,5 +90,6 @@ public class ColorImage {
 
     }
 }
+
 
 
