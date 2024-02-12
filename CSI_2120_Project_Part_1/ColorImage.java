@@ -1,4 +1,3 @@
-package CSI_2120_Project_Part_1;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -48,9 +47,10 @@ public class ColorImage {
                                 int blue = Integer.parseInt(rgbValues[i + 2]);
                                 int[] pix = {red, green, blue};
                                 pixels[index/width][index % width] = pix;
+                                index++;
                             }
 
-                            index++;
+                            
                         }
 
             } catch (IOException e) {
