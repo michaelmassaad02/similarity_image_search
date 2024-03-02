@@ -29,7 +29,7 @@ public class SimilaritySearch{
         queryImage.reduceColor(colorDepth); // reducing to colorDepth-bit values for the RGB combinations (total number of colors possible is reduced)
         ColorHistogram queryHistogram = new ColorHistogram(colorDepth); // initializing the histogram with default frequency 0
         queryHistogram.setImage(queryImage); //attaching query image to the histogram and modifying the histogram accordingly
-
+        queryHistogram.save(queryImageFilename + ".txt"); //saving the image's histogram into a file
         //Normalize the Query histogram before comparing
 
         File data_set_Dir = new File(imageDatasetDirectory); // Retrieving dataset of image files to find similar images to query

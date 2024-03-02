@@ -101,11 +101,12 @@ public class ColorHistogram {
     public void save(String filename) {  //write into a file using items in histogram 
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))){
-            bw.write(numBin);
+            bw.write(Integer.toString(numBin));
             bw.newLine();
 
             for (int i = 0; i < numBin; i++){
                 bw.write(Integer.toString(histogram[i]));
+                bw.write(" ");
             }
 
         }
