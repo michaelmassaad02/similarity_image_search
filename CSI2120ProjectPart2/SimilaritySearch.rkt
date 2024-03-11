@@ -7,6 +7,7 @@
 ; This function receives the filenames of the histogram for the query as well as the name of the directory
 ; that contains all of the dataset histogram files. This function then converts the parameters into suitable
 ; format and returns the 5 most similar images to the query image.
+; This is an example as to what an input could look like for this function: (similaritySearch "q00.ppm.txt" "imageDataset2_15_20")
 (define (similaritySearch queryHistFilename imageDatasetDir)
   (if (or (null? queryHistFilename)(null? imageDatasetDir))
       '("There has been an error with your input, please ensure your inputs are valid")
@@ -79,9 +80,9 @@
 
 ; This function receives as parameters 2 lists, both corresponding to the normalized histograms of
 ; 2 images of which we will compare their similarity with their histogram intersection. This function
-; will return a value from 0.0 to 1.0, which represents how similar are the 2 images.
+; will return a value from 0.0 to 1.0, which represents how similar the  2 images are to eachother.
 (define (compare normalizedHist1 normalizedHist2)  ; using the given forumla compares the two already normalized histograms
-  (if (or (null? normalizedHist1) (null? normalizedHist2));can do with either 1 or 2, no difference same size
+  (if (or (null? normalizedHist1) (null? normalizedHist2))
       0
       (+ (min (car normalizedHist1) (car normalizedHist2)) (compare (cdr normalizedHist1) (cdr normalizedHist2)))
       )
