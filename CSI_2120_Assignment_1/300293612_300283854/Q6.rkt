@@ -1,6 +1,10 @@
 #lang racket
 
-;JUST run to create the out.txt file
+;Matin Mobini 300283854
+;Michael Massaad 300293612
+
+;JUST run to create the out.txt file with your directory
+;TEST CASE is the in.txt file inside the directory, we have made a correct_out_answ.txt to show what the expected result of the out.txt file is
 
 (define (read-file filename)
   (with-input-from-file filename
@@ -11,12 +15,22 @@
           (if (= count num)
               (reverse numbers) ; Skip the first number
               (loop (cons (string->number (read-line)) numbers)
-                    (+ count 1))))))))
+                    (+ count 1)
+                    )
+              )
+          )
+        )
+      )
+    )
+  )
 
 (define (write-file filename data)
   (with-output-to-file filename
     (lambda ()
-      (for-each (lambda (x) (display x) (newline)) data))))
+      (for-each (lambda (x) (display x) (newline)) data)
+      )
+    )
+  )
 
 (define (longest-increasing-subsequence number numbers)
   (define (lis-helper nums)
@@ -41,25 +55,37 @@
          (let ((extended (loop (cdr nums) (cons (car nums) current) best)))
            (if (> (length extended) (length best))
                extended
-               best))))))
+               best)
+           )
+         )
+        )
+      )
+    )
 
   (let* ((index (let loop ((nums numbers)
                             (count 0))
                   (if (= (car nums) number)
                       count
-                      (loop (cdr nums) (+ count 1)))))
+                      (loop (cdr nums) (+ count 1))
+                      )
+                  )
+                )
          (nums (if (zero? index)
                    numbers
                    (let loop ((n numbers) (i index))
                      (if (zero? i)
                          n
-                         (loop (cdr n) (- i 1)))))))
-    (lis-helper nums)))
+                         (loop (cdr n) (- i 1))
+                         )
+                     )
+                   )
+               )
+         )
+    (lis-helper nums)
+    )
+  )
 
-
-
-
-(define (main)
+(define (main);This sets up the reading and writing, also calles functions to retreive result that should be wrote into out.txt
   (let* ((numbers (read-file "in.txt"))
          (subsequences (map (lambda (number) (longest-increasing-subsequence number numbers)) numbers))
          (longest (foldl (lambda (subseq acc)
@@ -67,8 +93,11 @@
                                subseq
                                acc))
                          '() subsequences)))
-    (write-file "out.txt" (cons (length longest) (reverse longest)))))
+    (write-file "out.txt" (cons (length longest) (reverse longest)))
+    )
+  )
 
 (main)
+
 
 

@@ -1,5 +1,9 @@
 #lang racket
 
+;Matin Mobini 300283854
+;Michael Massaad 300293612
+
+;Question 3: We defined a function "geometric-sequence-loop" to multiply the first number by a ratio, n times.
 
 (define (geometric-sequence-loop first-number ratio n)
   (define result '()) ; Define an empty list to store the sequence
@@ -12,10 +16,12 @@
   )
 
 
-; Example usage:
-(display (geometric-sequence-loop 7 3 5)) ; Output: (7 21 63 189 567)
-(display (geometric-sequence-loop 9 -1 7)) ; Output: (9 -9 9 -9 9 -9 9)
-(display (geometric-sequence-loop 2 2 10)) ; Output: (9 -9 9 -9 9 -9 9)
-
+;TEST CASES:
+(geometric-sequence-loop 7 3 5)
+;Expected Result: '(7 21 63 189 567)
+(geometric-sequence-loop 9 -1 7) 
+;Expected Result: '(9 -9 9 -9 9 -9 9)
+(geometric-sequence-loop 2 2 10) 
+;Expected Result: '(2 4 8 16 32 64 128 256 512 1024)
 
 
