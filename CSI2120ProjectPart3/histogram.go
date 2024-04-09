@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"image"
+	"path/filepath"
 	"sort"
 )
 
@@ -54,8 +55,8 @@ func normalizeHistogram(histogram Histogram) []float64 {
 
 	// loop each element in the old histogram
 	for i := 0; i < len(histogram.H); i++ {
-		normalizedHistogram[i] = float64(histogram.H[i])
-		normalizedHistogram[i] /= float64(numofPixels) // divide each histogram value by num of pixels
+		normalizedHistogram[i] = (float64(histogram.H[i])) / float64(numofPixels) // divide each histogram value by num of pixels
+		//normalizedHistogram[i] /= float64(numofPixels)
 	}
 
 	return normalizedHistogram //now it is normalized
@@ -121,8 +122,8 @@ func FiveHighest(FiveHighest map[string]float64) {
 	// Print the first 5 indexes in group
 	for i := 0; i < 5; i++ {
 		// Extract filename from the path
-		//filename := filepath.Base(group[i].FileName)
-		//fmt.Println((i + 1), "):", filename)
-		//fmt.Println(group[i].IntersecValue)
+		filename := filepath.Base(group[i].FileName)
+		fmt.Println((i + 1), "):", filename)
+		fmt.Println(group[i].IntersecValue)
 	}
 }

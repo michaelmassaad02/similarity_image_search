@@ -31,7 +31,7 @@ func main() {
 	}
 
 	// the number subarrays
-	k_val := 1
+	k_val := 1048
 
 	// read from input for query file
 	queryImage := "QueryImages/" + os.Args[1]
@@ -86,7 +86,8 @@ func calculateHistograms(imagePath []string, depth int, hChan chan<- Histogram) 
 	defer waitG.Done()
 
 	// loop through each image
-	for _, image := range imagePath {
+	for i := 0; i < len(imagePath); i++ {
+		image := imagePath[i]
 		// creates a histogram for each image
 		hist, err := calculateHistogram(image, depth)
 		if err != nil {
@@ -96,6 +97,7 @@ func calculateHistograms(imagePath []string, depth int, hChan chan<- Histogram) 
 		// send the hist through the channel
 		hChan <- hist
 	}
+
 }
 
 // compute the histogram given a single
@@ -153,19 +155,15 @@ func splitListIntoK(imageList []string, k_val int) [][]string {
 
 	// loop through each k_val
 	for i := 0; i < k_val; i++ {
-
-		startIndex := i * subArraySize // starting index of the slice
-
+		startIndex := i * subArraySize     // starting index of the slice
 		endIndex := (i + 1) * subArraySize // end index of the slice
 
 		if i < remainder {
 			endIndex++ // increase the end index
 		}
-
 		if endIndex > length {
 			endIndex = length // end index is the image length
 		}
-
 		// every subarray is now a slice from start to the end index
 		subArrays[i] = imageList[startIndex:endIndex]
 	}
@@ -183,10 +181,10 @@ func readImage(filePath string) (image.Image, error) {
 	defer file.Close() //  when the function ends close the file
 
 	// decode the jpeg image opened
-	img, err := jpeg.Decode(file)
+	image, err := jpeg.Decode(file)
 	if err != nil {
 		return nil, err
 	}
 
-	return img, nil
+	return image, nil
 }
